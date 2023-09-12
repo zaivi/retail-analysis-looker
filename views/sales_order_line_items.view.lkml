@@ -47,6 +47,37 @@ view: sales_order_line_items {
   }
   measure: count {
     type: count
-    drill_fields: [product_name]
+  }
+  measure: total_order {
+    type: number
+    sql: COUNT(${sales_order_no}) ;;
+  }
+  measure: customer_has_order {
+    type: count_distinct
+    sql: ${customer_no} ;;
+  }
+  measure: total_product_sold {
+    type: number
+    sql: COUNT(${product_code}) ;;
+  }
+  measure: distinct_product {
+    type: count_distinct
+    sql: ${product_code} ;;
+  }
+  measure: sum_total_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    description: "Total amount GST"
+    value_format_name: decimal_2
+  }
+  measure: AVG_Amount {
+    type: number
+    sql: 1.0 * ${sum_total_amount} / NULLIF(${total_order},0) ;;
+    value_format_name: decimal_2
+  }
+  measure: AVG_customer {
+    type: number
+    sql: 1.0 * ${sum_total_amount} / NULLIF(${customer_has_order},0) ;;
+    value_format_name: decimal_2
   }
 }

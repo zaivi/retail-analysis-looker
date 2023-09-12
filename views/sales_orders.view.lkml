@@ -11,14 +11,14 @@ view: sales_orders {
   }
   dimension_group: requested_delivery {
     type: time
-    timeframes: [raw, date, week, month, quarter, year]
-    convert_tz: no
+    timeframes: [date, week, month, year]
     datatype: date
     sql: ${TABLE}.requested_delivery_date ;;
   }
   dimension: sales_order_no {
     type: string
     sql: ${TABLE}.sales_order_no ;;
+    primary_key: yes
   }
   dimension: sales_order_type {
     type: string
