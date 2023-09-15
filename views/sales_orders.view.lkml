@@ -11,10 +11,15 @@ view: sales_orders {
   }
   dimension_group: requested_delivery {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [date, week, week_of_year, month, year]
     datatype: date
     sql: ${TABLE}.requested_delivery_date ;;
   }
+  dimension: deliveryWeekOfYear {
+    type: string
+    sql: CONCAT('Week',' ',${requested_delivery_week_of_year})  ;;
+  }
+
   dimension: sales_order_no {
     type: string
     sql: ${TABLE}.sales_order_no ;;

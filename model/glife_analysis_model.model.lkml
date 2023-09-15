@@ -25,5 +25,10 @@ explore: products {
     relationship: many_to_one
     sql_on: ${sales_order_line_items.sales_order_no} = ${sales_orders.sales_order_no} ;;
   }
-  hidden: yes
+
+  join: customers {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${sales_orders.customer_no} = ${customers.customer_no} ;;
+  }
 }

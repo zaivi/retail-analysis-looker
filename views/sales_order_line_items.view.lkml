@@ -16,6 +16,7 @@ view: sales_order_line_items {
   dimension: product_code {
     type: string
     sql: ${TABLE}.product_code ;;
+    primary_key: yes
   }
   dimension: product_name {
     type: string
@@ -48,15 +49,25 @@ view: sales_order_line_items {
   measure: count {
     type: count
   }
+  measure: total_packed_quantity {
+    type: sum
+    sql:${packed_quantity} ;;
+  }
+
   measure: total_order {
     type: number
     sql: COUNT(${sales_order_no}) ;;
   }
+  measure: total_order_dist {
+    type: number
+    sql: COUNT(DISTINCT ${sales_order_no}) ;;
+  }
+
   measure: customer_has_order {
     type: count_distinct
     sql: ${customer_no} ;;
   }
-  measure: total_product_sold {
+  measure: total_product {
     type: number
     sql: COUNT(${product_code}) ;;
   }
@@ -78,6 +89,23 @@ view: sales_order_line_items {
   measure: AVG_customer {
     type: number
     sql: 1.0 * ${sum_total_amount} / NULLIF(${customer_has_order},0) ;;
+    value_format_name: decimal_2
+  }
+
+  # Mockup 3
+  measure: total_unit {
+    type: sum
+    sql: ${unit_price} ;;
+    value_format_name: decimal_2
+  }
+  measure: AVG_unit_order {
+    type: number
+    sql: 1.0 * ${total_unit} / NULLIF(${total_order},0) ;;
+    value_format_name: decimal_2
+  }
+  measure: AVG_item_order {
+    type: number
+    sql: 1.0 * ${total_product} / NULLIF(${total_order},0) ;;
     value_format_name: decimal_2
   }
 }

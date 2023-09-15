@@ -16,6 +16,7 @@ view: customers {
   dimension: customer_no {
     type: string
     sql: ${TABLE}.customer_no ;;
+    primary_key: yes
   }
   dimension: delivery_address {
     type: string
