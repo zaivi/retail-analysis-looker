@@ -108,4 +108,9 @@ view: sales_order_line_items {
     sql: 1.0 * ${total_product} / NULLIF(${total_order},0) ;;
     value_format_name: decimal_2
   }
+  # report 4
+  measure: total_quantity {
+    type: sum
+    sql:${quantity} ;;
+  }
 }

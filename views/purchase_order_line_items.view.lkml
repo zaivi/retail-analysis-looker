@@ -41,4 +41,8 @@ view: purchase_order_line_items {
     type: count
     drill_fields: [product_name]
   }
+  measure: total_quantity {
+    type: sum
+    sql: ${quantity};;
+  }
 }
