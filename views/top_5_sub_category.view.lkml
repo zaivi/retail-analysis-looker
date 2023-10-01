@@ -14,6 +14,7 @@ view: top_5_sub_category {
       LEFT JOIN `glife-data-science.glife_analysis.sales_order_line_items`  AS sales_order_line_items ON products.product_code = sales_order_line_items.product_code
       LEFT JOIN `glife-data-science.glife_analysis.sales_orders`  AS sales_orders ON sales_order_line_items.sales_order_no = sales_orders.sales_order_no
       WHERE {% condition date_range_filter%} requested_delivery_date {% endcondition %}
+        AND {% condition sub_category_filter%} products.sub_category {% endcondition %}
       GROUP BY
           1,
           2
@@ -38,6 +39,13 @@ view: top_5_sub_category {
       GROUP BY
           1,2
     ;;
+  }
+
+  filter: sub_category_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: sub_category
   }
 
   filter: date_range_filter {

@@ -1,6 +1,21 @@
 view: products {
-  sql_table_name: `glife-data-science.glife_analysis.products` ;;
+  # sql_table_name: `glife-data-science.glife_analysis.products` ;;
+
+  derived_table: {
+    sql:
+      SELECT * FROM `glife-data-science.glife_analysis.products`
+      WHERE {% condition sub_category_filter%} sub_category {% endcondition %}
+    ;;
+  }
+
   # drill_fields: [product_name_link]
+
+  filter: sub_category_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: sub_category
+  }
 
   dimension: base_unit {
     type: string
@@ -23,7 +38,7 @@ view: products {
     sql: ${TABLE}.name ;;
     link: {
       label: "Filter by Product Name"
-      url: "https://novitee.cloud.looker.com/dashboards/13?Category={{ _filters['products.category'] }}&Date+Range={{ _filters['sales_orders.requested_delivery_date'] }}&Sub+Category={{ _filters['products.sub_category'] }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ value }}"
+      url: "https://novitee.cloud.looker.com/dashboards/13?Category={{ _filters['products.category'] }}&Date+Range={{ _filters['sales_orders.date_range_filter'] }}&Sub+Category={{ _filters['products.sub_category_filter'] }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ value }}"
     }
   }
   dimension: product_code {
