@@ -5,6 +5,7 @@ view: products {
     sql:
       SELECT * FROM `glife-data-science.glife_analysis.products`
       WHERE {% condition sub_category_filter%} sub_category {% endcondition %}
+      AND {% condition category_filter%} category {% endcondition %}
     ;;
   }
 
@@ -15,6 +16,13 @@ view: products {
     # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
     suggest_explore: products
     suggest_dimension: sub_category
+  }
+
+  filter: category_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: category
   }
 
   dimension: base_unit {

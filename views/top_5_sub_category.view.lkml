@@ -56,13 +56,20 @@ view: top_5_sub_category {
     suggest_dimension: requested_delivery_month
   }
 
+  filter: category_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: sub_category
+  }
+
   dimension: sub_category {
     type: string
     sql: ${TABLE}.sub_category ;;
     primary_key: yes
     link: {
       label: "Filter by Sub Category"
-      url: "/dashboards/13?Category={{ _filters['products.category'] }}&Date+Range={{ _filters['top_5_sub_category.date_range_filter'] }}&Sub+Category={{ value }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ _filters['products.name'] }}"
+      url: "/dashboards/13?Category={{ _filters['top_5_sub_category.category_filter'] }}&Date+Range={{ _filters['top_5_sub_category.date_range_filter'] }}&Sub+Category={{ value }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ _filters['products.name'] }}"
     }
   }
   dimension_group: requested_delivery {
