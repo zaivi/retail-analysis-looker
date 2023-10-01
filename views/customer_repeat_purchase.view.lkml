@@ -29,7 +29,7 @@ view: customer_repeat_purchase {
       UNION  ALL
 
       select
-       1 as from_to,
+       3 as from_to,
         c.customer_no
       from `glife-data-science.glife_analysis.customers`  c
       left join `glife-data-science.glife_analysis.sales_order_line_items` o on o.customer_no = c.customer_no
