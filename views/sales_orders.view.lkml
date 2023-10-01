@@ -1,5 +1,20 @@
 view: sales_orders {
-  sql_table_name: `glife-data-science.glife_analysis.sales_orders` ;;
+  # sql_table_name: `glife-data-science.glife_analysis.sales_orders` ;;
+
+  derived_table: {
+    sql:
+      SELECT * FROM `glife-data-science.glife_analysis.sales_orders`
+       WHERE {% condition date_range_filter%} requested_delivery_date {% endcondition %}
+    ;;
+  }
+
+  filter: date_range_filter {
+    type: date
+    datatype: date
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: requested_delivery_date
+  }
 
   dimension: customer_no {
     type: string

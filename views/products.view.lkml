@@ -1,5 +1,6 @@
 view: products {
   sql_table_name: `glife-data-science.glife_analysis.products` ;;
+  # drill_fields: [product_name_link]
 
   dimension: base_unit {
     type: string
@@ -16,6 +17,14 @@ view: products {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+  }
+  dimension: product_name_link {
+    type: string
+    sql: ${TABLE}.name ;;
+    link: {
+      label: "Filter by Product Name"
+      url: "https://novitee.cloud.looker.com/dashboards/13?Category={{ _filters['products.category'] }}&Date+Range={{ _filters['sales_orders.requested_delivery_date'] }}&Sub+Category={{ _filters['products.sub_category'] }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ value }}"
+    }
   }
   dimension: product_code {
     type: string

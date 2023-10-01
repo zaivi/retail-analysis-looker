@@ -31,7 +31,14 @@ explore: products {
     relationship: one_to_one
     sql_on: ${sales_orders.customer_no} = ${customers.customer_no} ;;
   }
+
+  join: top_5_sub_category {
+    type: left_outer
+    relationship: many_to_many
+    sql_on: ${products.sub_category} = ${top_5_sub_category.sub_category} ;;
+  }
 }
+explore: top_5_sub_category {}
 explore:stock_value { }
 explore: stock_out_stock_in {}
 
