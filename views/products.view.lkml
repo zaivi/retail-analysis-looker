@@ -38,7 +38,7 @@ view: products {
     sql: ${TABLE}.name ;;
     link: {
       label: "Filter by Product Name"
-      url: "https://novitee.cloud.looker.com/dashboards/13?Category={{ _filters['products.category'] }}&Date+Range={{ _filters['sales_orders.date_range_filter'] }}&Sub+Category={{ _filters['products.sub_category_filter'] }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ value }}"
+      url: "/dashboards/13?Category={{ _filters['products.category'] }}&Date+Range={{ _filters['sales_orders.date_range_filter'] }}&Sub+Category={{ _filters['products.sub_category_filter'] }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ value }}"
     }
   }
   dimension: product_code {
