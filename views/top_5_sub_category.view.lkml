@@ -15,6 +15,8 @@ view: top_5_sub_category {
       LEFT JOIN `glife-data-science.glife_analysis.sales_orders`  AS sales_orders ON sales_order_line_items.sales_order_no = sales_orders.sales_order_no
       WHERE {% condition date_range_filter%} requested_delivery_date {% endcondition %}
         AND {% condition sub_category_filter%} products.sub_category {% endcondition %}
+        AND {% condition category_filter%} products.category {% endcondition %}
+        AND {% condition product_name_filter%} products.name {% endcondition %}
       GROUP BY
           1,
           2
