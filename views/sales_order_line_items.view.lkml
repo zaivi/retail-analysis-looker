@@ -79,7 +79,8 @@ view: sales_order_line_items {
     type: sum
     sql: ${total_amount} ;;
     description: "Total amount GST"
-    value_format_name: decimal_2
+    # value_format_name: decimal_2
+    value_format: "$#,##0"
   }
   measure: AVG_Amount {
     type: number
@@ -91,7 +92,11 @@ view: sales_order_line_items {
     sql: 1.0 * ${sum_total_amount} / NULLIF(${customer_has_order},0) ;;
     value_format_name: decimal_2
   }
-
+  measure: AVG_total_amount{
+    type: number
+    sql: COUNT(${total_amount}) / NULLIF(${sum_total_amount},0) * 100;;
+    value_format_name:  decimal_2
+  }
   # Mockup 3
   measure: total_unit {
     type: sum
@@ -112,5 +117,12 @@ view: sales_order_line_items {
   measure: total_quantity {
     type: sum
     sql:${quantity} ;;
+  }
+  # AVG Number of Order per Customer
+  measure: AVG_Number_Order_Customer {
+    type: number
+    value_format_name: decimal_2
+    sql: 1.0 * ${total_order} / NULLIF(count(${customer_no}),0) ;;
+
   }
 }
