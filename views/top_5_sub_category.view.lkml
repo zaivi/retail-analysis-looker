@@ -63,13 +63,27 @@ view: top_5_sub_category {
     suggest_dimension: sub_category
   }
 
+  filter: product_name_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: sub_category
+  }
+
+  filter: product_type_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: sub_category
+  }
+
   dimension: sub_category {
     type: string
     sql: ${TABLE}.sub_category ;;
     primary_key: yes
     link: {
       label: "Filter by Sub Category"
-      url: "/dashboards/13?Category={{ _filters['top_5_sub_category.category_filter'] }}&Date+Range={{ _filters['top_5_sub_category.date_range_filter'] }}&Sub+Category={{ value }}&Product+Type={{ _filters['products.product_type'] }}&Product+Name={{ _filters['products.name'] }}"
+      url: "/dashboards/13?Category={{ _filters['top_5_sub_category.category_filter'] }}&Date+Range={{ _filters['top_5_sub_category.date_range_filter'] }}&Sub+Category={{ value }}&Product+Type={{ _filters['top_5_sub_category.product_type_filter'] }}&Product+Name={{ _filters['top_5_sub_category.product_name_filter'] }}"
     }
   }
   dimension_group: requested_delivery {

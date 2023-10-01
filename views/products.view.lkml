@@ -6,6 +6,8 @@ view: products {
       SELECT * FROM `glife-data-science.glife_analysis.products`
       WHERE {% condition sub_category_filter%} sub_category {% endcondition %}
       AND {% condition category_filter%} category {% endcondition %}
+      AND {% condition product_name_filter%} name {% endcondition %}
+      AND {% condition product_type_filter%} product_type {% endcondition %}
     ;;
   }
 
@@ -23,6 +25,20 @@ view: products {
     # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
     suggest_explore: products
     suggest_dimension: category
+  }
+
+  filter: product_name_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: name
+  }
+
+  filter: product_type_filter {
+    type: string
+    # sql: {% condition usage_end_time_filter %} ${usage_end_date} {% endcondition %} ;;
+    suggest_explore: products
+    suggest_dimension: product_type
   }
 
   dimension: base_unit {
