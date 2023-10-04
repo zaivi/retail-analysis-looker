@@ -82,6 +82,13 @@ view: sales_order_line_items {
     # value_format_name: decimal_2
     value_format: "$#,##0"
   }
+  measure: sum_total_amount_ly {
+    type: sum
+    sql: ${total_amount} * 0.8 ;;
+    description: "Total amount GST"
+    # value_format_name: decimal_2
+    value_format: "$#,##0"
+  }
   measure: AVG_Amount {
     type: number
     sql: 1.0 * ${sum_total_amount} / NULLIF(${total_order},0) ;;
@@ -125,4 +132,5 @@ view: sales_order_line_items {
     sql: 1.0 * ${total_order} / NULLIF(count(${customer_no}),0) ;;
 
   }
+
 }
