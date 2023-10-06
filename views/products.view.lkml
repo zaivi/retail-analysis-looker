@@ -3,7 +3,7 @@ view: products {
 
   derived_table: {
     sql:
-      SELECT * FROM `glife-data-science.glife_analysis.products`
+      SELECT * FROM `glife-data-science.glife_analysis.products_final`
       WHERE {% condition sub_category_filter%} sub_category {% endcondition %}
       AND {% condition category_filter%} category {% endcondition %}
       AND {% condition product_name_filter%} name {% endcondition %}

@@ -38,6 +38,7 @@ explore: products {
     sql_on: ${products.sub_category} = ${top_5_sub_category.sub_category} ;;
   }
 }
+
 explore: top_5_sub_category {}
 explore:stock_value { }
 explore: stock_out_stock_in {}
