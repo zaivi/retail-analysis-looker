@@ -1,28 +1,11 @@
-view: sales_amount_product_type_forecast {
-  sql_table_name: `glife-data-science.glife_analysis.v_forecast_sale_by_product_type` ;;
-  dimension_group: order {
-    type: time
-    timeframes: [raw, date, week, month, quarter, year]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.time_series_date ;;
-  }
-
-  dimension: Actual_Forecast {
-    type: string
-    sql: ${TABLE}.time_series_type ;;
-  }
-  dimension: product_type {
+view: product_type {
+  sql_table_name: `glife-data-science.glife_analysis.v_product_type` ;;
+  dimension: product_type{
     type: string
     sql: ${TABLE}.product_type ;;
-    }
-  measure: sales_amount{
-    type: sum
-    sql: ${TABLE}.total_amount ;;
   }
 }
-
-# view: sales_amount_product_type_forecast {
+# view: product_type {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {
 #     sql: SELECT
