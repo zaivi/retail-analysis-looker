@@ -60,3 +60,7 @@ explore: customers {
     sql_on: ${customer_repeat_purchase.customer_no} = ${customers.customer_no} ;;
   }
 }
+explore: sales_amount_forecast {}
+explore: sales_amount_forecast_l3m {}
+explore:sales_amount_product_type_forecast {}
+explore: sales_amount_product_type_forecast_l3m {}
