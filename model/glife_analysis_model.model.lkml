@@ -62,11 +62,15 @@ explore: customers {
 }
 explore: sales_amount_forecast {}
 explore: sales_amount_forecast_l3m {}
-
-explore:sales_amount_product_type_forecast {
- join: product_type {
-   type: left_outer
-  relationship: many_to_one
-  sql_on: ${sales_amount_product_type_forecast.Product_Type} = ${product_type.produt_type} ;;
- }
+explore: product_type {
+  join:sales_amount_product_type_forecast {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${sales_amount_product_type_forecast.product_type} = ${product_type.product_type} ;;
+}
+  join:sales_amount_product_type_forecast_l3m {
+     type: left_outer
+    relationship:one_to_many
+    sql_on: ${sales_amount_product_type_forecast_l3m.Product_Type} = ${product_type.product_type} ;;
+   }
 }
