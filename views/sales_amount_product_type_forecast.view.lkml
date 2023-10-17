@@ -20,6 +20,13 @@ view: sales_amount_product_type_forecast {
     type: sum
     sql: ${TABLE}.total_amount ;;
   }
+  measure: sum_total_amount_ly {
+    type: sum
+    sql: ${TABLE}.total_amount * 0.8 ;;
+    description: "Total amount"
+    # value_format_name: decimal_2
+    value_format: "$#,##0"
+  }
 }
 
 # view: sales_amount_product_type_forecast {
